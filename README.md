@@ -1,167 +1,195 @@
-Unifize Discount Engine
-
-A modular, extensible discount calculation engine for a fashion e-commerce platform.
-Implements brand discounts, category deals, coupon validation, and bank offers using a clean Rule Pipeline based on the Strategy Pattern.
-
-🔥 Features
-
-Pluggable discount rules (Strategy Pattern)
-
-Rule pipeline: Brand → Category → Coupon → Bank
-
-Coupon validation:
-
-🔒 Brand exclusions
-
-🏷️ Category restrictions
-
-⭐ Customer tier requirements
-
-Clean separation of:
-
-Rule logic
-
-Service orchestration
-
-Validation
-
-Fully async pipeline
-
-Tests included (pytest)
-
-Example usage (examples/run_example.py)
-
-Architecture diagram
-
-🧩 Project Structure
-discount_engine/
-    models/                → Core data models
-    services/
-        rules/             → Rules: brand, category, coupon, bank
-        validators/        → Coupon + cart validation logic
-        discount_service.py → Applies rule pipeline
-examples/
-tests/
-README.md
-
-🧠 Architecture Overview
-Strategy Pattern (Rule Modules)
-
-Each discount type is its own class:
-
-BrandDiscountRule
-
-CategoryDiscountRule
-
-CouponDiscountRule
-
-BankDiscountRule
-
-All inherit from:
-
-class DiscountRule(ABC):
-    async def apply(self, cart_items, customer, current_price, payment_info) -> Decimal:
-
-
-This allows:
-
-adding new rules in minutes
-
-changing discount logic without touching the engine
-
-clean testing
-
-Rule Pipeline (DiscountService)
-
-Order matters — just like in real e-commerce systems:
-
-Brand discount
-
-Category discount
-
-Coupon validation & discount
-
-Bank offer
-
-Each rule returns:
-
-discount amount (not the new price)
-
-DiscountService orchestrates everything.
-
-## 📊 Architecture Diagram (Figma)
+# Unifize Discount Engine
 
 <p align="center">
-  <img src="assets/discount_engine_diagram.png" alt="Discount Engine Architecture Diagram" width="700"/>
+  <img src="https://img.shields.io/github/actions/workflow/status/tabrezansari/unifize-discount-engine/tests.yaml?branch=main" alt="CI Status">
+  <img src="https://img.shields.io/badge/python-3.11-blue" alt="Python Version">
+  <img src="https://img.shields.io/github/v/release/tabrezansari/unifize-discount-engine" alt="Latest Release">
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
 </p>
 
+A modular, extensible discount calculation engine for a fashion e-commerce platform.
+Implements brand discounts, category deals, coupon validation, and bank offers using a clean **Rule Pipeline** based on the **Strategy Pattern**.
 
+---
 
-▶️ Running the Example
+## 🔥 Features
+
+- Pluggable discount rules (Strategy Pattern)
+- Rule pipeline: **Brand → Category → Coupon → Bank**
+- Coupon validation:
+  - Brand exclusions
+  - Category restrictions
+  - Customer tier requirements
+- Clean separation of:
+  - Rule logic
+  - Service orchestration
+  - Validation
+- Fully async-ready architecture
+- Pytest test suite
+- Example runner included (`examples/run_example.py`)
+- Architecture diagram included
+
+---
+
+## 📦 Installation & Environment Setup
+
+### Clone the repository
+
+```bash
+git clone https://github.com/tabrezansari/unifize-discount-engine.git
+cd unifize-discount-engine
+```
+
+### Create and activate a virtual environment
+
+```bash
+python3 -m venv venv
+source venv/bin/activate    # Mac/Linux
+venv\Scripts\activate     # Windows
+```
+
+### Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Verify installation
+
+```bash
+pytest -q
+```
+
+(Optional) Add project to PYTHONPATH:
+
+```bash
+export PYTHONPATH=$PYTHONPATH:$(pwd)
+```
+
+---
+
+## ▶️ Running the Example
+
+```bash
 python -m examples.run_example
+```
 
+Expected output:
 
-Example Output:
-
+```
 Original Price: 1000
 Final Price: 486
 Applied Discounts: {...}
+```
 
-🧪 Running Tests
+---
+
+## 🧪 Running Tests
+
+```bash
 python -m pytest -q
+```
 
-📝 Assumptions
+---
 
-Discounts defined in dummy data (assignment requirement)
+## 🧩 Project Structure
 
-Only one coupon at a time
+```
+discount_engine/
+    models/                 → Core data models
+    services/
+        rules/              → Brand, Category, Coupon, Bank rule implementations
+        validators/         → Validation logic
+        discount_service.py → Orchestrates rule pipeline
+examples/                   → Example runner
+tests/                      → Pytest suite
+assets/                     → Architecture diagram(s)
+README.md
+requirements.txt
+```
 
-No edge-case conflict-resolutions (assignment: happy-path only)
+---
 
-Async structure for future external API integrations
+## 🧠 Architecture Overview
 
-🧠 Technical Decisions
+### Strategy Pattern (Rule Modules)
 
-Strategy Pattern → Extensible rule modules
+Each discount type is its own isolated class:
 
-Pipeline Architecture → Predictable discount ordering
+- BrandDiscountRule
+- CategoryDiscountRule
+- CouponDiscountRule
+- BankDiscountRule
 
-Validation Layer → Early rejection of invalid coupons
+All inherit from a shared base:
 
-Async-first → Future-proof for real integrations
+```python
+class DiscountRule(ABC):
+    async def apply(self, cart_items, customer, current_price, payment_info) -> Decimal:
+        ...
+```
 
-Separation of concerns →
+### Rule Pipeline (DiscountService)
 
-rules
+1. Brand discount
+2. Category discount
+3. Coupon validation & application
+4. Bank offer
 
-validation
+Each rule returns:
 
-service
+```
+Decimal discount_amount
+```
 
-tests
+---
 
-models
+## 📊 Architecture Diagram (Figma)
 
-🚀 Future Enhancements
+![Architecture](assets/discount_engine_diagram.png)
 
-Data-driven discount configs
+---
 
-Multi-coupon stacking engines
+## 📝 Assumptions
 
-Buy X Get Y rules
+- Discounts come from assignment dummy data
+- Single active coupon at a time
+- Happy-path required only
+- Async structure future-proofs external API integrations
+- No conflict resolver for overlapping discounts
 
-Tiered pricing engine
+---
 
-Real-time AB-testing
+## 🧠 Technical Decisions
 
+- Strategy Pattern → modular rules
+- Pipeline Architecture → predictable order
+- Validation Layer → early invalidation
+- Async-first → scalable for integrations
+- Separation of concerns → modular testing & maintainability
 
-Branch protection rules enabled:
+---
+
+## 🚀 Future Enhancements
+
+- Config-driven discount engine
+- Multi-coupon stacking
+- Buy X Get Y
+- Tiered pricing engine
+- AB testing
+
+---
+
+## 🔐 Branch Protection Rules
+
 - PR required for develop/main
-- GitHub Actions CI must pass before merge
+- CI must pass before merge
+- Pre-commit enforced formatting
 
+---
 
+## 👤 Author
 
-👤 Author
-
-Implementation by Tabrez Ansari
-Engineering Manager Candidate – Unifize Assignment
+**Tabrez Ansari**
+Engineering Manager Candidate – Unifize
+GitHub: https://github.com/tabrezansari
