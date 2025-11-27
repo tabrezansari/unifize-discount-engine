@@ -1,5 +1,11 @@
 from decimal import Decimal
-from discount_engine.models.models import Product, BrandTier, CartItem, CustomerProfile, PaymentInfo
+from discount_engine.models.models import (
+    Product,
+    BrandTier,
+    CartItem,
+    CustomerProfile,
+    PaymentInfo,
+)
 
 puma_tshirt = Product(
     id="PUMA-TSHIRT-001",
@@ -10,17 +16,8 @@ puma_tshirt = Product(
     current_price=Decimal("1000"),
 )
 
-cart_items = [
-    CartItem(product=puma_tshirt, quantity=1, size="M")
-]
+cart_items = [CartItem(product=puma_tshirt, quantity=1, size="M")]
 
-customer = CustomerProfile(
-    id="CUST-123",
-    tier="SILVER"
-)
+customer = CustomerProfile(id="CUST-123", tier="SILVER")
 
-payment_info = PaymentInfo(
-    method="CARD",
-    bank_name="ICICI",
-    card_type="CREDIT"
-)
+payment_info = PaymentInfo(method="CARD", bank_name="ICICI", card_type="CREDIT")

@@ -3,6 +3,11 @@ from discount_engine.services.rules.base import DiscountRule
 
 
 class BrandDiscountRule(DiscountRule):
+    """
+    Applies brand-specific discount rules.
+    In dummy scenario: PUMA has a minimum 40% discount.
+    """
+
     name = "brand_discount"
 
     async def apply(self, cart_items, customer, current_price, payment_info=None):
