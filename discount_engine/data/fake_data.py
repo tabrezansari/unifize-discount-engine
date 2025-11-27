@@ -1,10 +1,11 @@
 from decimal import Decimal
+
 from discount_engine.models.models import (
-    Product,
     BrandTier,
     CartItem,
     CustomerProfile,
     PaymentInfo,
+    Product,
 )
 
 puma_tshirt = Product(

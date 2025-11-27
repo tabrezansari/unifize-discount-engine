@@ -1,4 +1,5 @@
 from decimal import Decimal
+
 from discount_engine.services.rules.base import DiscountRule
 
 
