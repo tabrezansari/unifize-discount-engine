@@ -31,7 +31,7 @@ Tests included (pytest)
 
 Example usage (examples/run_example.py)
 
-Architecture diagram 
+Architecture diagram
 
 🧩 Project Structure
 discount_engine/
@@ -153,6 +153,13 @@ Buy X Get Y rules
 Tiered pricing engine
 
 Real-time AB-testing
+
+
+Branch protection rules enabled:
+- PR required for develop/main
+- GitHub Actions CI must pass before merge
+
+
 
 👤 Author
 

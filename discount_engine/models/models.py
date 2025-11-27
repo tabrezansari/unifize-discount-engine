@@ -1,7 +1,7 @@
 from dataclasses import dataclass
-from typing import List, Optional, Dict
 from decimal import Decimal
 from enum import Enum
+from typing import Dict, List, Optional
 
 
 class BrandTier(Enum):

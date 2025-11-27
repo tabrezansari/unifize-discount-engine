@@ -1,19 +1,17 @@
 from decimal import Decimal
-from typing import List, Optional, Dict
-from discount_engine.services.validators.cart_validator import CartValidator
-
+from typing import Dict, List, Optional
 
 from discount_engine.models.models import (
     CartItem,
     CustomerProfile,
-    PaymentInfo,
     DiscountedPrice,
+    PaymentInfo,
 )
-
+from discount_engine.services.rules.bank_rule import BankDiscountRule
 from discount_engine.services.rules.brand_rule import BrandDiscountRule
 from discount_engine.services.rules.category_rule import CategoryDiscountRule
 from discount_engine.services.rules.coupon_rule import CouponDiscountRule
-from discount_engine.services.rules.bank_rule import BankDiscountRule
+from discount_engine.services.validators.cart_validator import CartValidator
 
 
 class DiscountService:
@@ -70,21 +68,19 @@ class DiscountService:
         from decimal import Decimal
 
 
-from typing import List, Optional, Dict
-from discount_engine.services.validators.cart_validator import CartValidator
-
+from typing import Dict, List, Optional
 
 from discount_engine.models.models import (
     CartItem,
     CustomerProfile,
-    PaymentInfo,
     DiscountedPrice,
+    PaymentInfo,
 )
-
+from discount_engine.services.rules.bank_rule import BankDiscountRule
 from discount_engine.services.rules.brand_rule import BrandDiscountRule
 from discount_engine.services.rules.category_rule import CategoryDiscountRule
 from discount_engine.services.rules.coupon_rule import CouponDiscountRule
-from discount_engine.services.rules.bank_rule import BankDiscountRule
+from discount_engine.services.validators.cart_validator import CartValidator
 
 
 class DiscountService:

@@ -1,6 +1,7 @@
 import asyncio
-from discount_engine.services.discount_service import DiscountService
+
 from discount_engine.data.fake_data import cart_items, customer, payment_info
+from discount_engine.services.discount_service import DiscountService
 
 
 async def main():
