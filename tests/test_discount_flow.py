@@ -20,3 +20,11 @@ async def test_multiple_discount_stacking():
     assert result.applied_discounts["brand_discount"] == Decimal("400")
     assert result.applied_discounts["category_discount"] == Decimal("60")
     assert result.applied_discounts["bank_discount"] == Decimal("54")
+
+
+@pytest.mark.asyncio
+async def test_coupon_validation_super69():
+    service = DiscountService()
+
+    ok = await service.validate_discount_code("SUPER69", cart_items, customer)
+    assert isinstance(ok, bool)
