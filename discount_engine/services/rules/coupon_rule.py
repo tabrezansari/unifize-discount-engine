@@ -1,0 +1,1 @@
+# Placeholder - will implement during refactor phase
